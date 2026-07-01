@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "alpha-synthesis"
+version = "0.1.0"
+description = "Institutional Multi-Modal Regime-Switching Strategy"
+authors = ["Mohamed <your.email@example.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+polars = "^1.3.0"
+duckdb = "^1.1.0"
+psycopg2-binary = "^2.9.9"
+httpx = "^0.27.0"
+numpy = "^1.26.4"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.0"
+ruff = "^0.4.4"
+black = "^24.4.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
