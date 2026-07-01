@@ -21,4 +21,4 @@ graph TD
 
 ## Dashboard link
 
-https://github.com/Max-Isse/alpha_synthesis/blob/master/docs/backtest_report.html
+https://max-isse.github.io/alpha_synthesis/
