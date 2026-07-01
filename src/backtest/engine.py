@@ -50,12 +50,15 @@ class AlphaBacktester:
             size=weight_matrix,
             size_type="target_percent",
             fees=self.fees,
-            cash_sharing=True
+            cash_sharing=True,
+            freq="D"  # <-- FIX 1: Explicitly tell vectorbt these are daily steps
         )
         
-        # Calculate key metric summaries
+        # Calculate key metric summaries with explicit annualization handling
         total_return = portfolio.total_return()
-        sharpe = portfolio.sharpe_ratio()
+        
+        # FIX 2: Pass the frequency explicitly to the Sharpe engine as well
+        sharpe = portfolio.sharpe_ratio(freq="D") 
         max_drawdown = portfolio.max_drawdown()
         
         return {
@@ -82,3 +85,20 @@ if __name__ == "__main__":
     print("\n--- Strategy Backtest Analytics Dashboard ---")
     print(f"Mean Strategy Sharpe Ratio: {results['sharpe_ratio']:.4f}")
     print(f"Max Portfolio Peak-to-Trough Drawdown: {results['max_drawdown']*100:.2f}%")
+    
+# Example: If you are building the portfolio from signals or weights
+portfolio = vbt.Portfolio.from_orders(
+    close=simulated_prices,
+    # ... your other arguments ...
+    freq='D'  # <--- ADD THIS (Use 'D' for daily, 'H' for hourly, etc.)
+)
+
+# Inside your backtest execution block or a utility script:
+portfolio_result = results["portfolio_object"]
+
+# Generate vectorbt's complete interactive performance overview page
+fig = portfolio_result.plots()
+
+# Export as an independent HTML file containing all Plotly rendering scripts natively
+fig.write_html("data/backtest_report.html", include_plotlyjs="cdn")
+print("Interactive performance report successfully exported to local workspace.")
