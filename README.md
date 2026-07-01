@@ -17,3 +17,8 @@ graph TD
     D -->|Asymmetric Financial Loss Training| E[LightGBM Core Feature Ranker]
     E -->|Vectorized Multi-Asset Matching| F[vectorbt Backtest Engine]
     F -->|Live Performance Analytics Web Server| G[Streamlit Production Dashboard]
+```
+
+## Dashboard link
+
+https://Max-Isse.github.io/alpha_synthesis/backtest_report.html
